@@ -75,7 +75,6 @@ public class DBUnits{
 							+ "\taccount_id: " + item.playerId 
 							+ "\tname:" + item.name 
 							+ "\tmap:" + "." + item.areaX + "." + item.areaY 
-							+ "\tcode_id: " + item.codeId
 							+ "\ttype: " + item.type
 							+ "\tname: " + item.name
 							+ "\thp: " + item.hp

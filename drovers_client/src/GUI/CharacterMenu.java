@@ -63,21 +63,21 @@ public class CharacterMenu{
 		else{
 			if(unit1codeShow){
 				World.unit1.draw(g);
-				World.unit1.drawMenu(g);
+				//World.unit1.drawMenu(g);
 				showMapCursor = false;
 				actionShow = false;
 				showCodeCursor = true;
 			}
 			else if(unit2codeShow){
 				World.unit2.draw(g);
-				World.unit2.drawMenu(g);
+				//World.unit2.drawMenu(g);
 				showMapCursor = false;
 				actionShow = false;
 				showCodeCursor = true;
 			}
 			else if(unit3codeShow){
 				World.unit3.draw(g);
-				World.unit3.drawMenu(g);
+				//World.unit3.drawMenu(g);
 				showMapCursor = false;
 				actionShow = false;
 				showCodeCursor = true;

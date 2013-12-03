@@ -1,11 +1,13 @@
 package server;
 
 import java.io.IOException;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import database.DBAccounts;
 import database.DBSquads;
+import Logic.Code;
 import World.PlayersOnline;
 import World.World;
 import World.WorldMap;
@@ -40,7 +42,19 @@ class Thread_Socket extends Thread
 			while(this.socket.isConnected()){
 				Object pack = in.readObject();
 				
-				if(pack instanceof Message){
+				if(pack instanceof Code){
+					Code code = (Code)pack;
+					DBSquads.map.get(this.accountId).unit1.code = code;
+					
+					pack = in.readObject();
+					code = (Code)pack;
+					DBSquads.map.get(this.accountId).unit2.code = code;
+					
+					pack = in.readObject();
+					code = (Code)pack;
+					DBSquads.map.get(this.accountId).unit3.code = code;
+				}
+				else if(pack instanceof Message){
 					Message msg = (Message)pack;
 					Server.msg_buffer.add(new MessageIn(msg, client_id));
 				}

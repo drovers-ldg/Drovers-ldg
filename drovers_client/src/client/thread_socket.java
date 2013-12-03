@@ -68,6 +68,9 @@ class Thread_Socket extends Thread
 					World.squad.unit1.readExternal(in);
 					World.squad.unit2.readExternal(in);
 					World.squad.unit3.readExternal(in);
+					
+					Chat.add_to_msg_log("[GAME] Send source code");
+					Sender.sendCode();
 					CharacterMenu.showArea = true;
 				}
 				else if(waitPlayerUpdate){

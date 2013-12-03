@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import Logic.Code;
+
 public class Unit implements Externalizable{
 	private static final long serialVersionUID = 201312012207L;
 	// Personal
@@ -17,7 +19,7 @@ public class Unit implements Externalizable{
 	public int areaY;
 	
 	// Code
-	public int codeId;
+	public Code code;
 	
 	// Combat data
 	public int hp;
@@ -39,8 +41,7 @@ public class Unit implements Externalizable{
 		this.playerId = playerId;
 		this.areaX = areaX;
 		this.areaY = areaY;
-		this.codeId = this.id;
-		
+		this.code = new Code();
 		this.type = type;
 		
 		switch(type){

@@ -2,7 +2,7 @@ package client;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import code.Code;
+import player_data.World;
 import messages.Message;
 
 
@@ -102,7 +102,9 @@ public class Sender{
 	public static void sendRobotsLoad() throws IOException{
 		new Message(Message.Type.ROBOTSLOAD, null).send(out);
 	}
-	public static void sendCode1(Code code) throws IOException{
-		code.send(out);
+	public static void sendCode() throws IOException{
+		World.unit1.send(out);
+		World.unit2.send(out);
+		World.unit3.send(out);
 	}
 }
