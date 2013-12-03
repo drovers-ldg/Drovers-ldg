@@ -27,7 +27,7 @@ public class Code implements Serializable {
 	
 	public static enum Action{
 		NULL,
-		WAIT, // null
+		WAIT, // wait event					 (WAIT->EVENT)
 		MOVE, // move to zone 				 (MOVE->ZONE)
 		MARK, // "mark" enemy 				 (MARK->TYPE)
 		SHOT  // "shot" enemy 				 (SHOT->TYPE|ENEMY) 
@@ -40,7 +40,7 @@ public class Code implements Serializable {
 		TEAM     // allies squad
 	};
 	
-	public static enum EmenyType{
+	public static enum Enemy{
 		NULL,
 		EASY,
 		HEAVY,
@@ -86,7 +86,7 @@ public class Code implements Serializable {
 		if(x != 0 && y != 0)
 			code[x][y] = new BlockActionZone(action, zone);
 	}
-	public void setBlock(int x, int y, Code.Action action, Code.EmenyType enemytype){
+	public void setBlock(int x, int y, Code.Action action, Code.Enemy enemytype){
 		if(x != 0 && y != 0)
 			code[x][y] = new BlockActionType(action, enemytype);
 	}
@@ -94,7 +94,7 @@ public class Code implements Serializable {
 		if(x != 0 && y != 0)
 			code[x][y] = new BlockEventZone(event, zone);
 	}
-	public void setBlock(int x, int y, Code.Event event, Code.EmenyType enemytype){
+	public void setBlock(int x, int y, Code.Event event, Code.Enemy enemytype){
 		if(x != 0 && y != 0)
 			code[x][y] = new BlockEventType(event, enemytype);
 	}
@@ -150,9 +150,9 @@ class BlockEventZone extends BlockEvent{
 }
 class BlockEventType extends BlockEvent{
 	private static final long serialVersionUID = 201312021911L;
-	public Code.EmenyType enemytype;
+	public Code.Enemy enemytype;
 	
-	public BlockEventType(Code.Event type, Code.EmenyType enemytype){
+	public BlockEventType(Code.Event type, Code.Enemy enemytype){
 		super(type);
 		this.enemytype = enemytype;
 	}
@@ -186,9 +186,9 @@ class BlockActionZone extends BlockAction{
 
 class BlockActionType extends BlockAction{
 	private static final long serialVersionUID = 201312021911L;
-	public Code.EmenyType enemytype;
+	public Code.Enemy enemytype;
 	
-	BlockActionType(Code.Action action, Code.EmenyType enemytype){
+	BlockActionType(Code.Action action, Code.Enemy enemytype){
 		super(action);
 		this.enemytype = enemytype;
 	}
