@@ -30,6 +30,7 @@ public class World{
 	public World(){
 		// Player
 		squad = new Squad();
+		enemySquad = new Squad();
 		
 		// GeoData
 		areaMap1 = new Area_Map();

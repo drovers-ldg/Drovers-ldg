@@ -92,14 +92,14 @@ public class CharacterMenu{
 							g.drawImage(World.texture_set.get("scout").getImage(), World.squad.unit2.areaX*32+380, World.squad.unit2.areaY*32, 23, 32, null);
 						if(World.squad.unit3.hp > 0)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
-						/*
-						if(World.enemySquad.unit1.hp > 0)
+
+						if(World.enemySquad.unit1 != null)
 							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit2.hp > 0)
+						if(World.enemySquad.unit2 != null)
 							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit3.hp > 0)
+						if(World.enemySquad.unit3 != null)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
-							*/
+
 						break;
 					case "2:":
 						// DOWN
@@ -111,14 +111,13 @@ public class CharacterMenu{
 						if(World.squad.unit3.hp > 0)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
 						
-						/*
-						if(World.enemySquad.unit1.hp > 0)
+						if(World.enemySquad.unit1 != null)
 							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit2.hp > 0)
+						if(World.enemySquad.unit2 != null)
 							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit3.hp > 0)
+						if(World.enemySquad.unit3 != null)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
-							*/
+
 						break;
 					case "3":
 						// LEFT  from-->
@@ -130,14 +129,13 @@ public class CharacterMenu{
 						if(World.squad.unit3.hp > 0)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
 						
-						/*
-						if(World.enemySquad.unit1.hp > 0)
+						if(World.enemySquad.unit1 != null)
 							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit2.hp > 0)
+						if(World.enemySquad.unit2 != null)
 							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit3.hp > 0)
+						if(World.enemySquad.unit3 != null)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
-							*/
+
 						break;
 					case "4":
 						// RIGHT <--from
@@ -148,15 +146,14 @@ public class CharacterMenu{
 							g.drawImage(World.texture_set.get("scout").getImage(), World.squad.unit2.areaX*32+380, World.squad.unit2.areaY*32, 23, 32, null);
 						if(World.squad.unit3.hp > 0)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
-						
-						/*
-						if(World.enemySquad.unit1.hp > 0)
+
+						if(World.enemySquad.unit1 != null)
 							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit2.hp > 0)
+						if(World.enemySquad.unit2 != null)
 							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
-						if(World.enemySquad.unit3.hp > 0)
+						if(World.enemySquad.unit3 != null)
 							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
-							*/
+
 						break;
 					default:
 				}

@@ -236,6 +236,7 @@ class Thread_Socket extends Thread
 		}
 		else if(msg.type.equals(Message.Type.BATTLEAREAEND)){
 			World.mergeAreas();
+			Sender.battleReady();
 		}
 		else if(msg.type.equals(Message.Type.AREAUPDATEUNITS)){
 			waitUnitsSoftUpdate = true;
