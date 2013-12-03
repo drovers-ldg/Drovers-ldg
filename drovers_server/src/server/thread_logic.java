@@ -160,6 +160,13 @@ class Thread_Logic extends Thread
 			else if(tmp.type.equals(Message.Type.CODE)){
 				Code.setBlock(tmp.data, tmp.client_id);
 			}
+			else if(tmp.type.equals(Message.Type.BATTLEREADY)){
+				int player1 = Server.battlesList.get(DBAccounts.map.get(Server.client_list.get(tmp.client_id).get_account_id()).battleId).playerId1;
+				if(player1 == Server.client_list.get(tmp.client_id).get_account_id())
+					Server.battlesList.get(DBAccounts.map.get(Server.client_list.get(tmp.client_id).get_account_id()).battleId).ready1 = true;
+				else
+					Server.battlesList.get(DBAccounts.map.get(Server.client_list.get(tmp.client_id).get_account_id()).battleId).ready2 = true;
+			}
 		}
 		Server.msg_buffer.clear();
 	}

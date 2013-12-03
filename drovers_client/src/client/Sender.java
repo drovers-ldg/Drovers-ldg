@@ -111,4 +111,8 @@ public class Sender{
 			}
 		}
 	}
+	
+	public static void battleReady() throws IOException{
+		new Message(Message.Type.BATTLEREADY, null).send(out);
+	}
 }

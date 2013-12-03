@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Message implements Serializable{
 	
-	private static final long serialVersionUID = 201312031704L;
+private static final long serialVersionUID = 201312031808L;
 	
 	public enum Type {
 		// read Manual\MessageTypes.txt
@@ -59,9 +59,12 @@ public class Message implements Serializable{
 		ERROR,
 		
 		// code
-		CODE
+		CODE,
+		BATTLEUNITMOVE,
+		BATTLEREADY,
+		PLAYERSPOSITION,
 	};
-		
+	
 	public Type type = Type.DEFAULT;
 	public int prefix = -1;
 	public String data = null;
@@ -81,6 +84,5 @@ public class Message implements Serializable{
 	
 	public void send(ObjectOutputStream out) throws IOException{
 		out.writeObject(this);
-		out.flush();
 	}
 }

@@ -1,17 +1,19 @@
 package server;
 
 import java.io.IOException;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import database.Account;
 import database.DBAccounts;
 import database.DBSquads;
-import World.PlayersOnline;
 import World.World;
 import World.WorldMap;
 import messages.Message;
 import messages.MessageDouble;
 import messages.MessageIn;
+
 
 class Thread_Socket extends Thread
 {
@@ -97,9 +99,13 @@ class Thread_Socket extends Thread
 		new Message(Message.Type.UPDATESQUADS).send(out);
 	}
 	
-	public void sendPlayersOnline() throws IOException {
-		PlayersOnline set = new PlayersOnline(this.client_id);
-		set.writeExternal(out);
+	public void sendPlayersOnline() throws IOException {		
+		for(Account item: DBAccounts.map.values()){
+			if(item.online){
+				send(Message.Type.PLAYERSPOSITION, ""+item.mapX+" "+item.mapY+" "+item.accountName);
+				System.out.println(""+item.mapX+" "+item.mapY+" "+item.accountName);
+			}
+		}	
 	}
 	
 	public void sendSquad() throws IOException{

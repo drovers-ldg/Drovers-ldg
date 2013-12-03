@@ -19,7 +19,10 @@ public class World{
 	public static HashMap<String, Sprite> texture_set;
 	public static Player playerData;
 	public static PlayersOnline playersOnline;
+	
+	public static Squad enemySquad;
 	public static Squad squad;
+	
 	public static Code unit1;
 	public static Code unit2;
 	public static Code unit3;

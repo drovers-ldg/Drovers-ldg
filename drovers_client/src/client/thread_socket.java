@@ -13,6 +13,7 @@ import messages.Message;
 import messages.MessageDouble;
 import player_data.Area_Map;
 import player_data.Player;
+import player_data.PlayerSend;
 import player_data.World;
 import player_data.WorldMap;
 
@@ -25,7 +26,6 @@ class Thread_Socket extends Thread
 	protected static boolean waitMap2Update;
 	protected static boolean waitWorldUpdate;
 	protected static boolean waitPlayerUpdate;
-	protected static boolean waitSQUpdate;
 	
 	// Squad update
 	protected static boolean waitUnitsUpdate;
@@ -50,16 +50,17 @@ class Thread_Socket extends Thread
 			while(Game.is_runing)
 			{
 				if(waitRobotLoad){
-					Game.state.set_state("char");
 					waitRobotLoad = false;
 					World.squad.unit1.readExternal(in);
 					World.squad.unit2.readExternal(in);
 					World.squad.unit3.readExternal(in);
+					Sender.sendSQUpdate();
+					
+					Game.state.set_state("char");
 					Chat.add_to_msg_log("[SERVER] Connection to \""+ Game.address  + "\" sucess.");
 				}
 				else if(waitSQUptatePreUnits){
 					waitSQUptatePreUnits = false;
-					World.playersOnline.readExternal(in);
 					waitUnitsUpdate = true;
 					Sender.updateSquad();
 				}
@@ -75,15 +76,12 @@ class Thread_Socket extends Thread
 					Sender.sendCode(World.unit3, 3);
 					
 					CharacterMenu.showArea = true;
+					Sender.battleReady();
 				}
 				else if(waitPlayerUpdate){
 					Player player = new Player();
 					player.readExternal(in);
 					processMsg(player);
-				}
-				else if(waitSQUpdate){
-					waitSQUpdate = false;
-					World.playersOnline.readExternal(in);
 				}
 				else if(waitMap1Update){
 					Area_Map map = new Area_Map();
@@ -145,11 +143,8 @@ class Thread_Socket extends Thread
 	private void loadMap2(Area_Map map) throws IOException {
 		World.areaMap2 = map;
 		waitMap2Update = false;
-		waitSQUpdate = true;
 		World.mergeAreas();
-		
 		waitSQUptatePreUnits = true;
-		Sender.sendSQUpdate();
 	}
 
 	private void loadMap1(Area_Map map) throws IOException {
@@ -178,6 +173,7 @@ class Thread_Socket extends Thread
 	}
 	
 	public void processMsg(Message msg) throws IOException{
+		System.out.println(msg.type + " " + msg.data);
 		if(msg.type.equals(Message.Type.DEFAULT)){
 			msgDefault(msg.data);
 		}
@@ -219,7 +215,6 @@ class Thread_Socket extends Thread
 			Player.mapX++;
 		}
 		else if(msg.type.equals(Message.Type.UPDATESQUADS)){
-			waitSQUpdate = true;
 			Sender.sendSQUpdate();
 		}
 		else if(msg.type.equals(Message.Type.BATTLEAREA1)){
@@ -230,8 +225,59 @@ class Thread_Socket extends Thread
 		else if(msg.type.equals(Message.Type.AREAUPDATEUNITS)){
 			waitUnitsSoftUpdate = true;
 		}
-
+		else if(msg.type.equals(Message.Type.BATTLEUNITMOVE)){
+			updateBattleUnits(msg.data);
+		}
+		else if(msg.type.equals(Message.Type.PLAYERSPOSITION)){
+			String [] tmp = msg.data.split(" ");
+			int x = Integer.parseInt(tmp[0]);
+			int y = Integer.parseInt(tmp[1]);
+			if(!World.playersOnline.set.containsKey(tmp[2]))
+				World.playersOnline.set.put(tmp[2], new PlayerSend(x, y, tmp[2]));
+			else{
+				World.playersOnline.set.get(tmp[2]).mapX = x;
+				World.playersOnline.set.get(tmp[2]).mapY = y;
+			}
+		}
 	}
+	private void updateBattleUnits(String data) {
+		String [] tmp = data.split(" ");
+		
+		int playerId = Integer.parseInt(tmp[0]);
+		int unitId = Integer.parseInt(tmp[1]);
+		int x = Integer.parseInt(tmp[2]);
+		int y = Integer.parseInt(tmp[3]);
+		
+		if(playerId == 0){
+			if(unitId == 1){
+				World.squad.unit1.areaX = x;
+				World.squad.unit1.areaY = y;
+			}
+			if(unitId == 2){
+				World.squad.unit2.areaX = x;
+				World.squad.unit2.areaY = y;
+			}
+			if(unitId == 3){
+				World.squad.unit3.areaX = x;
+				World.squad.unit3.areaY = y;
+			}
+		}
+		else{
+			if(unitId == 1){
+				World.enemySquad.unit1.areaX = x;
+				World.enemySquad.unit1.areaY = y;
+			}
+			if(unitId == 2){
+				World.enemySquad.unit2.areaX = x;
+				World.enemySquad.unit2.areaY = y;
+			}
+			if(unitId == 3){
+				World.enemySquad.unit3.areaX = x;
+				World.enemySquad.unit3.areaY = y;
+			}
+		}
+	}
+
 	private void msgDefault(String data){
 		Game.server_msg = data;
 	}

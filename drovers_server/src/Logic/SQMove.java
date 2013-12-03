@@ -17,8 +17,9 @@ public class SQMove{
 			int playerY = DBAccounts.map.get(accountId).mapY;
 			if((playerY - 1 > 0) && World.WorldMap.map[playerX][playerY-1].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapY--;
+				playerY--;
 			}
-			DBAccounts.moveUnits(playerX, playerY-1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVEUP, null);
 			updateSQRequest();
 		}
@@ -31,8 +32,9 @@ public class SQMove{
 			int playerY = DBAccounts.map.get(accountId).mapY;
 			if((playerY + 1 < World.WorldMap.sizeY) && World.WorldMap.map[playerX][playerY+1].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapY++;
+				playerY++;
 			}
-			DBAccounts.moveUnits(playerX, playerY+1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVEDOWN, null);
 			updateSQRequest();
 		}
@@ -45,8 +47,9 @@ public class SQMove{
 			int playerY = DBAccounts.map.get(accountId).mapY;
 			if((playerX + 1 < World.WorldMap.sizeX) && World.WorldMap.map[playerX+1][playerY].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapX++;
+				playerX++;
 			}
-			DBAccounts.moveUnits(playerX+1, playerY, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVERIGHT, null);
 			updateSQRequest();
 		}
@@ -59,8 +62,9 @@ public class SQMove{
 			int playerY = DBAccounts.map.get(accountId).mapY;
 			if(playerX - 1 > 0 && World.WorldMap.map[playerX-1][playerY].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapX--;
+				playerX--;
 			}
-			DBAccounts.moveUnits(playerX-1, playerY-1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVELEFT, null);
 			updateSQRequest();
 		}
@@ -74,8 +78,10 @@ public class SQMove{
 			if((playerX - 1 > 0) && (playerY - 1 > 0) && World.WorldMap.map[playerX-1][playerY-1].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapX--;
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapY--;
+				playerY--;
+				playerX--;
 			}
-			DBAccounts.moveUnits(playerX, playerY+1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVEUPLEFT, null);
 			updateSQRequest();
 		}
@@ -89,8 +95,10 @@ public class SQMove{
 			if((playerX + 1 < World.WorldMap.sizeX) && (playerY - 1 > 0) && World.WorldMap.map[playerX+1][playerY-1].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapX++;
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapY--;
+				playerX++;
+				playerY--;
 			}
-			DBAccounts.moveUnits(playerX+1, playerY-1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVEUPRIGHT, null);
 			updateSQRequest();
 		}
@@ -104,8 +112,10 @@ public class SQMove{
 			if((playerX - 1 > 0) && (playerY + 1 <  World.WorldMap.sizeY) && World.WorldMap.map[playerX-1][playerY+1].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapX--;
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapY++;
+				playerX--;
+				playerY++;
 			}
-			DBAccounts.moveUnits(playerX-1, playerY+1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVEDOWNLEFT, null);
 			updateSQRequest();
 		}
@@ -119,8 +129,10 @@ public class SQMove{
 			if((playerX + 1 < World.WorldMap.sizeX) && (playerY + 1 <  World.WorldMap.sizeY) && World.WorldMap.map[playerX+1][playerY+1].movable){
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapX++;
 				DBAccounts.map.get(Server.client_list.get(clientId).get_account_id()).mapY++;
+				playerX++;
+				playerY++;
 			}	
-			DBAccounts.moveUnits(playerX+1, playerY+1, accountId);
+			DBAccounts.moveUnits(playerX, playerY, accountId);
 			Server.client_list.get(clientId).send(Message.Type.SQMOVEDOWNRIGHT, null);
 			updateSQRequest();
 		}

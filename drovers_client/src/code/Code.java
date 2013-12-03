@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.Serializable;
-import client.Chat;
 import player_data.World;
 
 public class Code{
@@ -217,8 +216,6 @@ public class Code{
 					if(((BlockEventType) block).enemytype == Code.Enemy.ART)
 						data2 = 3;
 				}
-				
-			Chat.add_to_msg_log("Type: " + type + " data1: " + data1 + " data2:" + data2);
 			return ""+type+" "+data1+" "+data2;
 	}
 }

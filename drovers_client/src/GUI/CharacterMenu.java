@@ -58,7 +58,6 @@ public class CharacterMenu{
 		if(!unit1codeShow && !unit2codeShow && !unit3codeShow && !showArea){
 			WorldMap.draw(g);
 			World.playersOnline.draw(g);
-			g.drawImage(World.texture_set.get("art").getImage(), Player.mapX*32+380, Player.mapY*32, 32, 32, null);
 		}
 		else{
 			if(unit1codeShow){
@@ -87,18 +86,77 @@ public class CharacterMenu{
 					case "1":
 						// UP
 						World.areaMap1.draw(g);
+						if(World.squad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.squad.unit1.areaX*32+380, World.squad.unit1.areaY*32, 23, 32, null);
+						if(World.squad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.squad.unit2.areaX*32+380, World.squad.unit2.areaY*32, 23, 32, null);
+						if(World.squad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
+						/*
+						if(World.enemySquad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
+							*/
 						break;
 					case "2:":
 						// DOWN
 						World.areaMap1.draw(g);
+						if(World.squad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.squad.unit1.areaX*32+380, World.squad.unit1.areaY*32, 23, 32, null);
+						if(World.squad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.squad.unit2.areaX*32+380, World.squad.unit2.areaY*32, 23, 32, null);
+						if(World.squad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
+						
+						/*
+						if(World.enemySquad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
+							*/
 						break;
 					case "3":
 						// LEFT  from-->
 						World.areaMap1.draw(g);
+						if(World.squad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.squad.unit1.areaX*32+380, World.squad.unit1.areaY*32, 23, 32, null);
+						if(World.squad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.squad.unit2.areaX*32+380, World.squad.unit2.areaY*32, 23, 32, null);
+						if(World.squad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
+						
+						/*
+						if(World.enemySquad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
+							*/
 						break;
 					case "4":
 						// RIGHT <--from
 						World.areaMap1.draw(g);
+						if(World.squad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.squad.unit1.areaX*32+380, World.squad.unit1.areaY*32, 23, 32, null);
+						if(World.squad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.squad.unit2.areaX*32+380, World.squad.unit2.areaY*32, 23, 32, null);
+						if(World.squad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.squad.unit3.areaX*32+380, World.squad.unit3.areaY*32, 23, 32, null);
+						
+						/*
+						if(World.enemySquad.unit1.hp > 0)
+							g.drawImage(World.texture_set.get("sturm").getImage(), World.enemySquad.unit1.areaX*32+380, World.enemySquad.unit1.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit2.hp > 0)
+							g.drawImage(World.texture_set.get("scout").getImage(), World.enemySquad.unit2.areaX*32+380, World.enemySquad.unit2.areaY*32, 23, 32, null);
+						if(World.enemySquad.unit3.hp > 0)
+							g.drawImage(World.texture_set.get("art").getImage(),   World.enemySquad.unit3.areaX*32+380, World.enemySquad.unit3.areaY*32, 23, 32, null);
+							*/
 						break;
 					default:
 				}
