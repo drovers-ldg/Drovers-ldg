@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import Logic.Code;
 import database.DBAccounts;
 import messages.Message;
 import messages.MessageIn;
@@ -53,6 +54,9 @@ class Thread_Logic extends Thread
 	public static void processEvents() throws IOException, SQLException{
 		for(int i = 0; i < Server.msg_buffer.size(); ++i){
 			MessageIn tmp = Server.msg_buffer.get(i);
+			if(Server.debug){
+				System.out.println(tmp.type + ": "  + tmp.data);
+			}
 			
 			if(tmp.type.equals(Message.Type.DEFAULT)){
 				System.out.println(tmp.data);
@@ -153,9 +157,8 @@ class Thread_Logic extends Thread
 			else if(tmp.type.equals(Message.Type.ROBOTSLOAD)){
 				sendSQ(tmp.client_id);
 			}
-			else if(tmp.type.equals(Message.Type.CODESEND)){
-				System.out.println("RECIVED");
-				System.out.println(tmp.data);
+			else if(tmp.type.equals(Message.Type.CODE)){
+				Code.setBlock(tmp.data, tmp.client_id);
 			}
 		}
 		Server.msg_buffer.clear();

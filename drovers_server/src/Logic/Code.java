@@ -3,6 +3,9 @@ package Logic;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.Serializable;
+import server.Server;
+import database.DBSquads;
+
 
 public class Code{
 		
@@ -60,6 +63,10 @@ public class Code{
 			if(x != 0 && y != 0)
 				code[x][y].type = Code.Type.NULL;
 		}
+		public void setBlock(int x, int y){
+			if(x != 0 && y != 0)
+				code[x][y] = new Block();
+		}
 		public void setBlock(int x, int y, Code.Action action, Code.Zone zone){
 			if(x != 0 && y != 0)
 				code[x][y] = new BlockActionZone(action, zone);
@@ -77,8 +84,174 @@ public class Code{
 				code[x][y] = new BlockEventType(event, enemytype);
 		}
 		
-		public void setBlock(String str){
+		public static void setBlock(String str, int clientId){
 			// i, j, type, data1, data2, id
+			String [] data = str.split(" ");
+			int x = Integer.parseInt(data[0]);
+			int y = Integer.parseInt(data[1]);
+			int type = Integer.parseInt(data[2]);
+			int data1 = Integer.parseInt(data[3]);
+			int data2 = Integer.parseInt(data[4]);
+			int id = Integer.parseInt(data[5]);
+			
+			Enemy enemytype = Code.Enemy.NULL;
+			Code.Event event = Code.Event.NULL;
+			Code.Zone zone = Code.Zone.NULL;
+			Code.Action action = Code.Action.NULL;
+			
+			switch (type){
+				case 0:
+					if(id == 1)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit1.code.setBlock(x, y);
+					if(id == 2)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit2.code.setBlock(x, y);
+					if(id == 3)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit3.code.setBlock(x, y);
+				case 1:
+					// EVENT
+					switch(data1){
+						case 1:
+							event = Code.Event.DESTROY;
+							break;
+						case 2: 
+							event = Code.Event.DETECT;
+							break;
+						case 3: 
+							event = Code.Event.ENTERZONE;
+							break;
+						case 4: 
+							event = Code.Event.MARK;
+							break;
+						case 5: 
+							event = Code.Event.MOVE;
+							break;
+					}
+					
+					// ZONE
+					switch(data2){
+						case 1: 
+							zone = Code.Zone.ENEMY;
+							break;
+						case 2:
+							zone = Code.Zone.NETURAL;
+							break;
+						case 3:
+							zone = Code.Zone.TEAM;
+							break;
+					}
+					
+					if(id == 1)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit1.code.setBlock(x, type, event, zone);
+					if(id == 2)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit2.code.setBlock(x, type, event, zone);
+					if(id == 3)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit3.code.setBlock(x, type, event, zone);
+					break;
+				case 2:
+					// EVENT
+	
+					switch(data1){
+						case 1:
+							event = Code.Event.DESTROY;
+							break;
+						case 2: 
+							event = Code.Event.DETECT;
+							break;
+						case 3: 
+							event = Code.Event.ENTERZONE;
+							break;
+						case 4: 
+							event = Code.Event.MARK;
+							break;
+						case 5: 
+							event = Code.Event.MOVE;
+							break;
+					}
+					// TYPE
+					switch(data2){
+					case 1: 
+						enemytype = Code.Enemy.EASY;
+						break;
+					case 2:
+						enemytype = Code.Enemy.HEAVY;
+						break;
+					case 3:
+						enemytype = Code.Enemy.ART;
+						break;
+					}
+					if(id == 1)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit1.code.setBlock(x, type, event, enemytype);
+					if(id == 2)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit2.code.setBlock(x, type, event, enemytype);
+					if(id == 3)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit3.code.setBlock(x, type, event, enemytype);
+					break;
+				case 3:
+					// ACTION
+
+					switch(data1){
+						case 1:
+							action = Code.Action.MARK;
+							break;
+						case 2:
+							action = Code.Action.MOVE;
+							break;
+						case 3:
+							action = Code.Action.SHOT;
+							break;
+						case 4:
+							action = Code.Action.WAIT;
+							break;
+					}
+					// ZONE
+
+					switch(data2){
+						case 1: 
+							zone = Code.Zone.ENEMY;
+							break;
+						case 2:
+							zone = Code.Zone.NETURAL;
+							break;
+						case 3:
+							zone = Code.Zone.TEAM;
+							break;
+					}
+					if(id == 1)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit1.code.setBlock(x, type, action, zone);
+					if(id == 2)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit2.code.setBlock(x, type, action, zone);
+					if(id == 3)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit3.code.setBlock(x, type, action, zone);
+					break;
+				case 4:
+					// ACTION
+
+					switch(data1){
+						case 1:
+							action = Code.Action.MARK;
+							break;
+						case 2:
+							action = Code.Action.MOVE;
+							break;
+						case 3:
+							action = Code.Action.SHOT;
+							break;
+						case 4:
+							action = Code.Action.WAIT;
+							break;
+					}
+					if(id == 1)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit1.code.setBlock(x, type, action, enemytype);
+					if(id == 2)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit2.code.setBlock(x, type, action, enemytype);
+					if(id == 3)
+						DBSquads.map.get(Server.client_list.get(clientId).get_account_id()).unit3.code.setBlock(x, type, action, enemytype);
+					break;
+				case 5:
+					code[0][0] = new BlockMain();
+					break;
+				default:
+			}
 		}
 }
 

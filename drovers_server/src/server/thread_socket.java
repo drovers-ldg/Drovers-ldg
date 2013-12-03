@@ -40,7 +40,6 @@ class Thread_Socket extends Thread
 		try{		
 			while(this.socket.isConnected()){
 				Object pack = in.readObject();
-					
 				if(pack instanceof Message){
 					Message msg = (Message)pack;
 					Server.msg_buffer.add(new MessageIn(msg, client_id));

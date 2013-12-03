@@ -107,7 +107,7 @@ public class Sender{
 			for(int j = 0; j < 10; ++j){
 				// i, j, type, data1, data2, id
 				String str = "" + i + " " + j + " " + unit.getCode(i, j) + " " + id;
-				new Message(Message.Type.CODESEND, str);
+				new Message(Message.Type.CODE, str).send(out);
 			}
 		}
 	}
