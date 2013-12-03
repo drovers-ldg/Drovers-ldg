@@ -47,9 +47,9 @@ public class BattleThread extends Thread{
 			System.out.println("Send Map");
 			sendMaps();
 			
-			while(true){
-				if(ready1 && ready2)
-					BattleLogic();
+			
+			while(player1.unit1.hp > 0 || player1.unit2.hp > 0 || player1.unit3.hp > 0 || player2.unit1.hp > 0 || player2.unit2.hp > 0 || player2.unit3.hp > 0){
+				BattleLogic();
 			}
 		} 
 		catch (IOException e) {
@@ -61,6 +61,8 @@ public class BattleThread extends Thread{
 	}
 	
 	private void BattleLogic() throws IOException {
+		// LOGIC
+		
 		sendUnitsMove();
 	}
 
@@ -83,6 +85,8 @@ public class BattleThread extends Thread{
 		Server.client_list.get(DBAccounts.map.get(playerId2).clientId).send(Message.Type.BATTLEAREA, "" + this.topology);
 		Server.client_list.get(DBAccounts.map.get(playerId1).clientId).sendMap(this.id, this.mapX1, this.mapY1, this.mapX2, this.mapY2);
 		Server.client_list.get(DBAccounts.map.get(playerId2).clientId).sendMap(this.id, this.mapX1, this.mapY1, this.mapX2, this.mapY2);
+		
+		sendUnitsMove();
 	}
 	
 	public synchronized void sendUnitsMove() throws IOException{
