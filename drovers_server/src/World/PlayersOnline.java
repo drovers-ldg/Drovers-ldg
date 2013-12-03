@@ -22,19 +22,23 @@ public class PlayersOnline implements Externalizable{
 	}
 	
 	public PlayersOnline updateSet(int clientId){
-		Set<Integer> client_list = Server.client_list.keySet();
-		Set<Integer> send_list = new HashSet<Integer>();
-		
-		for(Integer index: client_list){
-			if(Server.client_list.get(index).get_connection() && index != clientId){
-				send_list.add(index);
+		synchronized(Server.client_list){
+			synchronized(DBAccounts.map){
+				Set<Integer> client_list = Server.client_list.keySet();
+				Set<Integer> send_list = new HashSet<Integer>();
+				
+				for(Integer index: client_list){
+					if(Server.client_list.get(index).get_connection() && index != clientId){
+						send_list.add(index);
+					}
+				}
+				this.set.clear();
+				for(Integer index: send_list){
+					this.set.add(new PlayerSend(DBAccounts.map.get(Server.client_list.get(index).get_account_id()).mapX,
+							DBAccounts.map.get(Server.client_list.get(index).get_account_id()).mapY,
+							DBAccounts.map.get(Server.client_list.get(index).get_account_id()).playerName));
+				}
 			}
-		}
-		this.set.clear();
-		for(Integer index: send_list){
-			this.set.add(new PlayerSend(DBAccounts.map.get(Server.client_list.get(index).get_account_id()).mapX,
-					DBAccounts.map.get(Server.client_list.get(index).get_account_id()).mapY,
-					DBAccounts.map.get(Server.client_list.get(index).get_account_id()).playerName));
 		}
 		return this;
 	}

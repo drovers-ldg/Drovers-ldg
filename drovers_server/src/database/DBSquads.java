@@ -13,7 +13,7 @@ public class DBSquads{
 	public static HashMap<Integer, Squad> map;
 		
 	// SQL
-	protected final static String sqlInsertSQ = "INSERT INTO squads (accountId, unit1, unit2, unit3) VALUES (?, ?, ?, ?)";
+	protected final static String sqlInsertSQ = "INSERT INTO squads (account_id, unit1, unit2, unit3) VALUES (?, ?, ?, ?)";
 	protected final static String sqlDeleteSQ = "DELETE FROM squads WHERE id = ?";
 	
 	DBSquads() throws SQLException{
@@ -29,7 +29,7 @@ public class DBSquads{
 		
 		while(result.next()){
 			map.put(result.getInt("id"), new Squad(result.getInt("id"),
-												  result.getInt("accountId"),
+												  result.getInt("account_id"),
 												  result.getInt("unit1"),
 												  result.getInt("unit2"),
 												  result.getInt("unit3")));

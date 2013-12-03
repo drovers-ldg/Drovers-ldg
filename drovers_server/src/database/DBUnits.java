@@ -14,7 +14,7 @@ public class DBUnits{
 	public static HashMap<Integer, Unit> map;
 		
 	// SQL
-	protected final static String sqlInsertUnit = "INSERT INTO units (player_id, bodyType, code_id) VALUES (?, ?, ?)";
+	protected final static String sqlInsertUnit = "INSERT INTO units (player_id, type, code_id) VALUES (?, ?, ?)";
 	protected final static String sqlDeleteUnit = "DELETE FROM units WHERE id = ?";
 	protected final static String sqlMoveUnitMap = "UPDATE units SET mapX = ?, mapY = ? WHERE id = ?";
 	
@@ -35,7 +35,7 @@ public class DBUnits{
 												  result.getInt("player_id"),
 												  result.getInt("areaX"),
 												  result.getInt("areaY"),
-												  result.getString("bodyType")));
+												  result.getString("type")));
 		}
 		System.out.println("DB.Units loaded. Fields: " + map.size());
 	}
