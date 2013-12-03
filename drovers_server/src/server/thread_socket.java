@@ -67,20 +67,22 @@ class Thread_Socket extends Thread
 	public void send(String player, String data) throws IOException{
 		new MessageDouble(player, data).send(out);
 	}
-	public void sendMap(int type) throws IOException{
+	public void sendMap(int battleId, int mapX1, int mapY1, int mapX2, int mapY2) throws IOException{
 		synchronized(DBAccounts.map){
 			synchronized(Server.battlesList){
-				int battleId = DBAccounts.map.get(this.accountId).battleId;
-				if(type == 1){
-					int mapX = Server.battlesList.get(battleId).mapX1;
-					int mapY = Server.battlesList.get(battleId).mapY1;
-					World.areaMaps.get(WorldMap.map[mapX][mapY].areaName).writeExternal(out);
+				for(int i = 0; i < 10; ++i){
+					for(int j = 0; j < 10; ++j){
+						int type = World.areaMaps.get(WorldMap.map[mapX1][mapY1].areaName).map[i][j];
+						send(Message.Type.BATTLEAREA1, ""+i+" "+j+" "+type);
+					}
 				}
-				else if(type == 2){
-					int mapX = Server.battlesList.get(battleId).mapX2;
-					int mapY = Server.battlesList.get(battleId).mapY2;
-					World.areaMaps.get(WorldMap.map[mapX][mapY].areaName).writeExternal(out);
+				for(int i = 0; i < 10; ++i){
+					for(int j = 0; j < 10; ++j){
+						int type = World.areaMaps.get(WorldMap.map[mapX2][mapY2].areaName).map[i][j];
+						send(Message.Type.BATTLEAREA2, ""+i+" "+j+" "+type);
+					}
 				}
+				send(Message.Type.BATTLEAREAEND, null);
 			}
 		}
 	}

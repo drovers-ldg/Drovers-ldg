@@ -34,6 +34,13 @@ public class World{
 		// GeoData
 		areaMap1 = new Area_Map();
 		areaMap2 = new Area_Map();
+		areaMap1.map = new int[10][10];
+		areaMap1.size_x = 10;
+		areaMap1.size_y = 10;
+		areaMap2.map = new int[10][10];
+		areaMap2.size_x = 10;
+		areaMap2.size_y = 10;
+		
 		worldMap = new WorldMap();
 		playerData = new Player();
 		playersOnline = new PlayersOnline();

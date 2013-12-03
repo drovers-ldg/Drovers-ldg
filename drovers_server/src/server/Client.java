@@ -53,8 +53,8 @@ public class Client{
 	public Thread_Socket get_socket(){
 		return this.thread;
 	}
-	public void sendMap(int type) throws IOException{
-		this.thread.sendMap(type);
+	public void sendMap(int battleId, int x1, int y1, int x2, int y2) throws IOException{
+		this.thread.sendMap(battleId, x1, y1, x2, y2);
 	}
 	public void sendWorld() throws IOException {
 		this.thread.sendWorld();

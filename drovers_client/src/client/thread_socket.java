@@ -217,10 +217,25 @@ class Thread_Socket extends Thread
 		else if(msg.type.equals(Message.Type.UPDATESQUADS)){
 			Sender.sendSQUpdate();
 		}
-		else if(msg.type.equals(Message.Type.BATTLEAREA1)){
+		else if(msg.type.equals(Message.Type.BATTLEAREA)){
 			AreaMapMenu.topology = msg.data;
-			waitMap1Update = true;
-			Sender.UpdateArea1();
+		}
+		else if(msg.type.equals(Message.Type.BATTLEAREA1)){
+			String [] tmp = msg.data.split(" ");
+			int x = Integer.parseInt(tmp[0]);
+			int y = Integer.parseInt(tmp[1]);
+			int type = Integer.parseInt(tmp[2]);
+			World.areaMap1.map[x][y] = type;
+		}
+		else if(msg.type.equals(Message.Type.BATTLEAREA2)){
+			String [] tmp = msg.data.split(" ");
+			int x = Integer.parseInt(tmp[0]);
+			int y = Integer.parseInt(tmp[1]);
+			int type = Integer.parseInt(tmp[2]);
+			World.areaMap2.map[x][y] = type;
+		}
+		else if(msg.type.equals(Message.Type.BATTLEAREAEND)){
+			World.mergeAreas();
 		}
 		else if(msg.type.equals(Message.Type.AREAUPDATEUNITS)){
 			waitUnitsSoftUpdate = true;

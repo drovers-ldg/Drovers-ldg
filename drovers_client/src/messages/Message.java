@@ -47,8 +47,11 @@ private static final long serialVersionUID = 201312031808L;
 		SQATTACKDOWNRIGHT,
 		
 		// AreaMaps loading
+		BATTLEAREA,
+		BATTLEAREASIZE,
 		BATTLEAREA1,
 		BATTLEAREA2,
+		BATTLEAREAEND,
 		SQUPDATE,
 		ROBOTSLOAD,
 		

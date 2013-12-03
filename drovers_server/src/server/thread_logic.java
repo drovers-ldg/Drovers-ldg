@@ -221,7 +221,7 @@ class Thread_Logic extends Thread
 	}
 	
 	private static void sendArea(int clientId, int type) throws IOException{
-		Server.client_list.get(clientId).sendMap(type);
+		Server.battlesList.get(DBAccounts.map.get(Server.client_list.get(clientId).get_account_id())).sendMaps();
 	}
 	
 	private static void sendSQ(int clientId) throws IOException {

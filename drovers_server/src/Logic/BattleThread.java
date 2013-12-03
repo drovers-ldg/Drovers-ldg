@@ -79,8 +79,10 @@ public class BattleThread extends Thread{
 	}
 	
 	public synchronized void sendMaps() throws IOException{
-		Server.client_list.get(DBAccounts.map.get(playerId1).clientId).send(Message.Type.BATTLEAREA1, new String() + this.topology);
-		Server.client_list.get(DBAccounts.map.get(playerId2).clientId).send(Message.Type.BATTLEAREA1, new String() + this.topology);
+		Server.client_list.get(DBAccounts.map.get(playerId1).clientId).send(Message.Type.BATTLEAREA, "" + this.topology);
+		Server.client_list.get(DBAccounts.map.get(playerId2).clientId).send(Message.Type.BATTLEAREA, "" + this.topology);
+		Server.client_list.get(DBAccounts.map.get(playerId1).clientId).sendMap(this.id, this.mapX1, this.mapY1, this.mapX2, this.mapY2);
+		Server.client_list.get(DBAccounts.map.get(playerId2).clientId).sendMap(this.id, this.mapX1, this.mapY1, this.mapX2, this.mapY2);
 	}
 	
 	public synchronized void sendUnitsMove() throws IOException{
