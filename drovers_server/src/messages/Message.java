@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Message implements Serializable{
 	
-	private static final long serialVersionUID = 201312021833L;
+	private static final long serialVersionUID = 201312031500L;
 	
 	public enum Type {
 		// read Manual\MessageTypes.txt
@@ -56,7 +56,10 @@ public class Message implements Serializable{
 		AREAUPDATEUNITS,
 		
 		// err msg
-		ERROR
+		ERROR,
+		
+		// code
+		CODESEND
 	};
 	
 	public Type type = Type.DEFAULT;

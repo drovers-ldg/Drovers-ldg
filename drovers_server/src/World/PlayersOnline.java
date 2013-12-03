@@ -17,11 +17,12 @@ public class PlayersOnline implements Externalizable{
 	
 	private Vector<PlayerSend> set;
 	
-	public PlayersOnline(){
+	public PlayersOnline(int clientId){
 		set = new Vector<PlayerSend>();
+		updateSet(clientId);
 	}
 	
-	public PlayersOnline updateSet(int clientId){
+	public void updateSet(int clientId){
 		synchronized(Server.client_list){
 			synchronized(DBAccounts.map){
 				Set<Integer> client_list = Server.client_list.keySet();
@@ -40,7 +41,6 @@ public class PlayersOnline implements Externalizable{
 				}
 			}
 		}
-		return this;
 	}
 	
 	protected class PlayerSend implements Serializable{

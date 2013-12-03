@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.Serializable;
 
-public class Code implements Serializable {
-		private static final long serialVersionUID = 201312021911L;
+public class Code{
 		
 		public static enum Type{
 			NULL,
@@ -78,8 +77,8 @@ public class Code implements Serializable {
 				code[x][y] = new BlockEventType(event, enemytype);
 		}
 		
-		public void send(ObjectOutput out) throws IOException{
-			out.writeObject(out);
+		public void setBlock(String str){
+			// i, j, type, data1, data2, id
 		}
 }
 

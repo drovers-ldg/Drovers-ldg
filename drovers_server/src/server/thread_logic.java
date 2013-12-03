@@ -153,6 +153,10 @@ class Thread_Logic extends Thread
 			else if(tmp.type.equals(Message.Type.ROBOTSLOAD)){
 				sendSQ(tmp.client_id);
 			}
+			else if(tmp.type.equals(Message.Type.CODESEND)){
+				System.out.println("RECIVED");
+				System.out.println(tmp.data);
+			}
 		}
 		Server.msg_buffer.clear();
 	}

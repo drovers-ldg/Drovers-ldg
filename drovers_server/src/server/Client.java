@@ -78,5 +78,4 @@ public class Client{
 	public void sendSquadSoftUpdate() throws IOException {
 		this.thread.sendSquadSoftUpdate();
 	}
-
 }

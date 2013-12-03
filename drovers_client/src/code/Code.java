@@ -4,11 +4,10 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.Serializable;
+import client.Chat;
 import player_data.World;
 
-public class Code implements Serializable {
-	private static final long serialVersionUID = 201312021911L;
-	
+public class Code{
 	public static enum Type{
 		NULL,
 		MAIN,
@@ -101,9 +100,128 @@ public class Code implements Serializable {
 	
 	public void send(ObjectOutput out) throws IOException{
 		out.writeObject(out);
+		out.flush();
+	}
+
+	public String getCode(int x, int y) throws IOException {
+			Block block = code[x][y];
+			int type = 0;
+			int data1 = 0;
+			int data2 = 0;
+	
+			if(block instanceof BlockMain){
+					type = 5;
+					data1 = 0;
+					data2 = 0;
+				}
+				else if(block instanceof BlockEventZone){
+					type = 1;
+						
+					// EVENT
+					if(((BlockEvent) block).event == Code.Event.NULL);
+						data1 = 0; // null
+					if(((BlockEvent) block).event == Code.Event.DESTROY);
+						data1 = 1;
+					if(((BlockEvent) block).event == Code.Event.DETECT);
+						data1 = 2;
+					if(((BlockEvent) block).event == Code.Event.ENTERZONE);
+						data1 = 3;
+					if(((BlockEvent) block).event == Code.Event.MARK);
+						data1 = 4;
+					if(((BlockEvent) block).event == Code.Event.MOVE);
+						data1 = 5;
+					// ZONE	
+					if(((BlockEventZone) block).zone == Code.Zone.NULL)
+						data2 = 0;
+					if(((BlockEventZone) block).zone == Code.Zone.ENEMY)
+						data2 = 1;
+					if(((BlockEventZone) block).zone == Code.Zone.NETURAL)
+						data2 = 2;
+					if(((BlockEventZone) block).zone == Code.Zone.TEAM)
+						data2 = 3;
+				}
+				else if(block instanceof BlockEventType){
+					type = 2;
+						
+					// EVENT
+					if(((BlockEvent) block).event == Code.Event.NULL);
+						data1 = 0; // null
+					if(((BlockEvent) block).event == Code.Event.DESTROY);
+						data1 = 1;
+					if(((BlockEvent) block).event == Code.Event.DETECT);
+						data1 = 2;
+					if(((BlockEvent) block).event == Code.Event.ENTERZONE);
+						data1 = 3;
+					if(((BlockEvent) block).event == Code.Event.MARK);
+						data1 = 4;
+					if(((BlockEvent) block).event == Code.Event.MOVE);
+						data1 = 5;
+						
+					// TYPE
+					if(((BlockEventType) block).enemytype == Code.Enemy.NULL)
+						data2 = 0; // null
+					if(((BlockEventType) block).enemytype == Code.Enemy.EASY)
+						data2 = 1;
+					if(((BlockEventType) block).enemytype == Code.Enemy.HEAVY)
+						data2 = 2;
+					if(((BlockEventType) block).enemytype == Code.Enemy.ART)
+						data2 = 3;
+				}
+				else if(block instanceof BlockActionZone){
+					type = 3;
+						
+					// ACTION
+					if(((BlockAction) block).action == Code.Action.NULL)
+						data1 = 0;
+					if(((BlockAction) block).action == Code.Action.MARK)
+						data1 = 1;
+					if(((BlockAction) block).action == Code.Action.MOVE)
+						data1 = 2;
+					if(((BlockAction) block).action == Code.Action.SHOT)
+						data1 = 3;
+					if(((BlockAction) block).action == Code.Action.WAIT)
+						data1 = 4;
+						
+					// ZONE	
+					if(((BlockEventZone) block).zone == Code.Zone.NULL)
+						data2 = 0;
+					if(((BlockEventZone) block).zone == Code.Zone.ENEMY)
+						data2 = 1;
+					if(((BlockEventZone) block).zone == Code.Zone.NETURAL)
+						data2 = 2;
+					if(((BlockEventZone) block).zone == Code.Zone.TEAM)
+						data2 = 3;
+				}
+				else if(block instanceof BlockActionType){
+					type = 4;
+						
+					// ACTION
+					if(((BlockAction) block).action == Code.Action.NULL)
+						data1 = 0;
+					if(((BlockAction) block).action == Code.Action.MARK)
+						data1 = 1;
+					if(((BlockAction) block).action == Code.Action.MOVE)
+						data1 = 2;
+					if(((BlockAction) block).action == Code.Action.SHOT)
+						data1 = 3;
+					if(((BlockAction) block).action == Code.Action.WAIT)
+						data1 = 4;
+						
+					// TYPE
+					if(((BlockEventType) block).enemytype == Code.Enemy.NULL)
+						data2 = 0; // null
+					if(((BlockEventType) block).enemytype == Code.Enemy.EASY)
+						data2 = 1;
+					if(((BlockEventType) block).enemytype == Code.Enemy.HEAVY)
+						data2 = 2;
+					if(((BlockEventType) block).enemytype == Code.Enemy.ART)
+						data2 = 3;
+				}
+				
+			Chat.add_to_msg_log("Type: " + type + " data1: " + data1 + " data2:" + data2);
+			return ""+type+" "+data1+" "+data2;
 	}
 }
-
 
 //--------------------------------
 class Block implements Serializable{
@@ -120,22 +238,23 @@ class Block implements Serializable{
 	
 	public void send(ObjectOutput out) throws IOException{
 		out.writeObject(this);
+		out.flush();
 	}
 }
 //--------------------------------
 //EVENT
 class BlockEvent extends Block{
 	private static final long serialVersionUID = 201312021911L;
-	public Code.Event type;
+	public Code.Event event;
 	
 	public BlockEvent(){
 		super(Code.Type.EVENT);
-		this.type = Code.Event.NULL;
+		this.event = Code.Event.NULL;
 	}
 	
-	public BlockEvent(Code.Event type){
+	public BlockEvent(Code.Event event){
 		super(Code.Type.EVENT);
-		this.type = type;
+		this.event = event;
 	}
 }
 
@@ -143,8 +262,8 @@ class BlockEventZone extends BlockEvent{
 	private static final long serialVersionUID = 201312021911L;
 	public Code.Zone zone;
 	
-	public BlockEventZone(Code.Event type, Code.Zone zone){
-		super(type);
+	public BlockEventZone(Code.Event event, Code.Zone zone){
+		super(event);
 		this.zone = zone;
 	}
 }
@@ -152,8 +271,8 @@ class BlockEventType extends BlockEvent{
 	private static final long serialVersionUID = 201312021911L;
 	public Code.Enemy enemytype;
 	
-	public BlockEventType(Code.Event type, Code.Enemy enemytype){
-		super(type);
+	public BlockEventType(Code.Event event, Code.Enemy enemytype){
+		super(event);
 		this.enemytype = enemytype;
 	}
 }
@@ -161,16 +280,16 @@ class BlockEventType extends BlockEvent{
 //ACTION
 class BlockAction extends Block{
 	private static final long serialVersionUID = 201312021911L;
-	public Code.Action type;
+	public Code.Action action;
 	
 	public BlockAction(){
 		super(Code.Type.ACTION);
-		this.type = Code.Action.NULL;
+		this.action = Code.Action.NULL;
 	}
 	
-	public BlockAction(Code.Action type){
+	public BlockAction(Code.Action action){
 		super(Code.Type.ACTION);
-		this.type = type;
+		this.action = action;
 	}
 }
 
